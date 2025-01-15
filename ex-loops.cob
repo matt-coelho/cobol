@@ -1,7 +1,7 @@
       ******************************************************************
       * Author:
       * Date:
-      * Purpose: comandos repeticao - perform
+      * Purpose: exercicio sobre loops
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
