@@ -20,6 +20,7 @@
                    02 REG-ID PIC 9(04).
                    02 REG-NOME PIC X(20).
                    02 REG-TEL PIC X(11).
+
        WORKING-STORAGE SECTION.
        77 fs-clientes pic 9(02) value ZERO.
        77 msg-erro pic x(30) VALUE SPACE.
@@ -32,7 +33,7 @@
 
        0050-principal section.
            PERFORM 0100-inicializar.
-           perform 0110-gravar.
+      *    perform 0110-gravar.
            perform 0300-finalizar.
            STOP RUN.
 
@@ -51,12 +52,19 @@
                END-EVALUATE.
 
        0105-pedir-dados SECTION.
-           DISPLAY "digite o id"
-               ACCEPT wrk-id.
-           DISPLAY "digite o nome"
-               ACCEPT wrk-nome.
-           DISPLAY "digite o telefone"
-               ACCEPT wrk-tel.
+           PERFORM until wrk-id EQUAL 9999
+               DISPLAY "digite o id"
+                   ACCEPT wrk-id
+
+               if wrk-id not EQUAL 9999
+                   DISPLAY "digite o nome"
+                       ACCEPT wrk-nome
+                   DISPLAY "digite o telefone"
+                       ACCEPT wrk-tel
+
+                   perform 0110-gravar
+               end-if
+           END-PERFORM.
 
        0110-gravar section.
            move wrk-id to REG-ID.
